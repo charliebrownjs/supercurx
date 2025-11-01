@@ -1,0 +1,5 @@
+{
+  "name": "React Google Login Flow",
+  "description": "A simple React application demonstrating a login flow with Google Auth, leading to a hello world page.",
+  "requestFramePermissions": []
+}
