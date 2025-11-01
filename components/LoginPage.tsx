@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useCallback } from 'react';
 import type { User } from '../types';
+import { config, Config } from '@/src/config/env';
 
 // Helper function to decode JWT from Google
 function decodeJwtResponse(token: string) {
@@ -50,10 +51,8 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
 
   useEffect(() => {
     if (window.google && window.google.accounts) {
-      // IMPORTANT: You must replace this with your actual Google Client ID for the authentication to work.
-      // You can get one from the Google Cloud Console: https://console.cloud.google.com/apis/credentials
-      const GOOGLE_CLIENT_ID = '510990753449-qihjcn8ikg2t1rpuk003mqdqdikkc6gr.apps.googleusercontent.com';
-      
+      const GOOGLE_CLIENT_ID = config.googleClientId;
+
       window.google.accounts.id.initialize({
         client_id: GOOGLE_CLIENT_ID,
         callback: handleCredentialResponse,
