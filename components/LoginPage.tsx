@@ -1,8 +1,10 @@
+// comentários em pt-br
+
 import React, { useEffect, useRef, useCallback } from 'react';
 import type { User } from '../types';
 import { config, Config } from '@/src/config/env';
 
-// Helper function to decode JWT from Google
+// Função auxiliar para decodificar o JWT do Google
 function decodeJwtResponse(token: string) {
   try {
     const base64Url = token.split('.')[1];
@@ -26,13 +28,14 @@ interface LoginPageProps {
   onLogin: (user: User) => void;
 }
 
-// Ensure google object is available on window for TypeScript
+// Extensão da interface global do Window para incluir o objeto google
 declare global {
   interface Window {
     google: any;
   }
 }
 
+// Componente da página de login
 export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
   const googleButtonRef = useRef<HTMLDivElement>(null);
 
