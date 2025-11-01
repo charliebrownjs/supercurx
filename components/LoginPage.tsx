@@ -50,13 +50,19 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
 
   useEffect(() => {
     if (window.google && window.google.accounts) {
-      // IMPORTANT: You must replace this with your actual Google Client ID for the authentication to work.
-      // You can get one from the Google Cloud Console: https://console.cloud.google.com/apis/credentials
-      const GOOGLE_CLIENT_ID = '510990753449-qihjcn8ikg2t1rpuk003mqdqdikkc6gr.apps.googleusercontent.com';
+      const GOOGLE_CLIENT_ID = process.env.VITE_GOOGLE_CLIENT_ID;
       
+      if (!GOOGLE_CLIENT_ID) {
+        console.error('Google Client ID não encontrado nas variáveis de ambiente');
+        return;
+      }
+
       window.google.accounts.id.initialize({
         client_id: GOOGLE_CLIENT_ID,
         callback: handleCredentialResponse,
+        auto_select: false, // Desativa a seleção automática para maior segurança
+        cancel_on_tap_outside: true, // Permite que o usuário cancele clicando fora
+        context: 'signin', // Explicita o contexto de uso
       });
 
       if (googleButtonRef.current) {
